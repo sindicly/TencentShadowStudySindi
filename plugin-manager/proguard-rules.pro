@@ -21,6 +21,7 @@
 #-renamesourcefileattribute SourceFile
 
 #noinspection ShrinkerUnresolvedReference
--keep class com.tencent.shadow.core.common.**{*;}
--keep class com.tencent.shadow.core.runtime.**{*;}
--keep class com.tencent.shadow.dynamic.host.**{*;}
+-keep class com.tencent.shadow.dynamic.impl.**{*;}
+-keep class com.tencent.shadow.dynamic.loader.**{*;}
+-keep class com.tencent.shadow.dynamic.impl.ManagerFactoryImpl {*;}
+-keep class com.tencent.shadow.dynamic.impl.WhiteList {*;}

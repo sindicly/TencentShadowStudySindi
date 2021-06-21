@@ -1,21 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.test.shadow">
-
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TencentShadowStudySindi">
+        android:theme="@style/Theme.TencentShadowStudy">
+
+        <!--container 注册
+            注意configChanges需要全注册
+            theme需要注册成透明-->
+
+        <!--以下这些类不打包在宿主app中，打包在plugin-runtime中，以便减少宿主方法数增量,Activity 路径需要和插件中的匹配，后面会说到-->
+        <!--
+            android:multiprocess="true"//表示多进程(多插件的时候使用)
+            android:process=":plugin"//表示单进程(当个插件使用)
+            android:theme="@style/transparent_theme" //theme需要注册成透明
+        -->
+
+
+        <service
+            android:name=".service.MainPluginProcessService"
+            android:process=":main_plugin" />
+
+        <activity
+            android:name="com.test.plugin_runtime.PluginDefaultProxyActivity"
+            android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
+            android:hardwareAccelerated="true"
+            android:launchMode="standard"
+            android:multiprocess="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/transparent_theme" />
+
+        <activity
+            android:name="com.test.plugin_runtime.PluginSingleInstance1ProxyActivity"
+            android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleInstance"
+            android:multiprocess="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/transparent_theme" />
+
+        <activity
+            android:name="com.test.plugin_runtime.PluginSingleTask1ProxyActivity"
+            android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTask"
+            android:multiprocess="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/transparent_theme" />
+
+        <provider
+            android:name="com.tencent.shadow.core.runtime.container.PluginContainerContentProvider"
+            android:authorities="com.tencent.shadow.sindi.contentprovider"
+            android:grantUriPermissions="true" /> <!--允许通过接受传递的权限方式进行访问  dynamic activity注册，注意configChanges需要全注册-->
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

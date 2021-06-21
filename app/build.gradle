@@ -8,7 +8,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.test.shadow"
+        applicationId project.APP_APPLICATION_ID
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
@@ -30,6 +30,16 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    sourceSets {
+        debug {
+            assets.srcDir('build/generated/assets/plugin-manager/debug/')
+            assets.srcDir('build/generated/assets/plugin-zip/debug/')
+        }
+        release {
+            assets.srcDir('build/generated/assets/plugin-manager/release/')
+            assets.srcDir('build/generated/assets/plugin-zip/release/')
+        }
+    }
 }
 
 dependencies {
@@ -39,7 +49,59 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation project(path: ':constants')//共同使用的常量库
+    implementation 'commons-io:commons-io:2.5'//sample-host从assets中复制插件用的
+    implementation "com.tencent.shadow.dynamic:host:$shadow_version"//腾讯插件框架shadow
+}
+
+def createCopyTask(projectName, buildType, name, apkName, inputFile, taskName) {
+    //E:\AndroidStudioProjects\TencentShadowStudy\app\build\generated\assets\...
+    def outputFile = file("${getBuildDir()}/generated/assets/${name}/${buildType}/${apkName}")
+    outputFile.getParentFile().mkdirs()
+    return tasks.create("copy${buildType.capitalize()}${name.capitalize()}Task", Copy) {
+        group = 'build'
+        description = "复制${name}到assets中."
+        from(inputFile.getParent()) {
+            include(inputFile.name)
+            rename { outputFile.name }
+        }
+        into(outputFile.getParent())
+
+    }.dependsOn("${projectName}:${taskName}")
+}
+
+def generateAssets(generateAssetsTask, buildType) {//以下是自动生成插件
+    def moduleName = 'plugin-manager'
+    //E:\AndroidStudioProjects\TencentShadowStudy\plugin-manager\build\outputs\apk\debug\plugin-manager-debug.apk
+    def pluginManagerApkFile = file("${project(":plugin-manager").getBuildDir()}" + "/outputs/apk/${buildType}/" + "${moduleName}-${buildType}.apk")
+    generateAssetsTask.dependsOn createCopyTask(
+            ':plugin-manager',
+            buildType,
+            moduleName,
+            'plugin-manager.apk',
+            pluginManagerApkFile,
+            "assemble${buildType.capitalize()}"//打包apk的任务栈名（编译器自带） assemblePlugin
+    )
+
+    //E:\AndroidStudioProjects\TencentShadowStudy\build\plugin-debug.zip
+    def pluginZip = file("${getRootProject().getBuildDir()}/plugin-${buildType}.zip")
+    generateAssetsTask.dependsOn createCopyTask(
+            ':plugin-app',//模块名 TODO
+            buildType,//编译版本类型:Debug或者Release
+            'plugin-zip',//TODO
+            "plugin-${buildType}.zip",//生成的zip名
+            pluginZip,//输入文件
+            "package${buildType.capitalize()}Plugin"//打包zip的任务栈名（编译器自带） packageDebugPlugin
+    )
+}
+
+//在task被添加的时候定义依赖关系
+tasks.whenTaskAdded { task ->
+    if (task.name == "generateDebugAssets") {
+        generateAssets(task, 'debug')
+    }
+    if (task.name == "generateReleaseAssets") {
+        generateAssets(task, 'release')
+    }
 }

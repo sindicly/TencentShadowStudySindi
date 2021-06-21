@@ -21,6 +21,34 @@
 #-renamesourcefileattribute SourceFile
 
 #noinspection ShrinkerUnresolvedReference
--keep class com.tencent.shadow.core.common.**{*;}
--keep class com.tencent.shadow.core.runtime.**{*;}
+#kotlin一般性配置 START
+-dontwarn kotlin.**
+-keepclassmembers class **$WhenMappings {
+    <fields>;
+}
+-keepclassmembers class kotlin.Metadata {
+    public <methods>;
+}
+#kotlin一般性配置 END
+
+#kotlin优化性能 START
+-assumenosideeffects class kotlin.jvm.internal.Intrinsics {
+    static void checkParameterIsNotNull(java.lang.Object, java.lang.String);
+}
+#kotlin优化性能 END
+
+-keep class org.slf4j.**{*;}
+-dontwarn org.slf4j.impl.**
+
 -keep class com.tencent.shadow.dynamic.host.**{*;}
+-keep class com.tencent.shadow.dynamic.impl.**{*;}
+-keep class com.tencent.shadow.dynamic.loader.**{*;}
+-keep class com.tencent.shadow.core.common.**{*;}
+-keep class com.tencent.shadow.core.loader.**{*;}
+-keep class com.tencent.shadow.core.runtime.**{*;}
+
+-dontwarn  com.tencent.shadow.dynamic.host.**
+-dontwarn  com.tencent.shadow.dynamic.impl.**
+-dontwarn  com.tencent.shadow.dynamic.loader.**
+-dontwarn  com.tencent.shadow.core.common.**
+-dontwarn  com.tencent.shadow.core.loader.**

@@ -1,0 +1,102 @@
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        mavenLocal()
+    }
+
+    dependencies {
+        classpath "com.tencent.shadow.core:runtime:$shadow_version"
+        classpath "com.tencent.shadow.core:activity-container:$shadow_version"
+        classpath "com.tencent.shadow.core:gradle-plugin:$shadow_version"
+        classpath 'org.javassist:javassist:3.22.0-GA'
+    }
+}
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId project.APP_APPLICATION_ID
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+}
+
+
+apply plugin: 'com.tencent.shadow.plugin'
+shadow {
+    transform {
+//   useHostContext = ['abc']
+    }
+
+    packagePlugin {
+        pluginTypes {
+            debug {
+                loaderApkConfig = new Tuple2('plugin-loader-debug.apk', ':plugin-loader:assembleDebug')
+                runtimeApkConfig = new Tuple2('plugin-runtime-debug.apk', ':plugin-runtime:assembleDebug')
+                pluginApks {
+                    pluginApk1 {
+                        businessName = 'plugin-app'
+                        partKey = 'plugin-app'
+                        buildTask = ':plugin-app:assembleDebug'
+                        apkName = 'plugin-app-debug.apk'
+                        apkPath = 'plugin-app/build/outputs/apk/debug/plugin-app-debug.apk'
+                    }
+                }
+            }
+
+            release {
+                loaderApkConfig = new Tuple2('plugin-loader-release.apk', ':plugin-loader:assembleRelease')
+                runtimeApkConfig = new Tuple2('plugin-runtime-release.apk', ':plugin-runtime:assembleRelease')
+                pluginApks {
+                    pluginApk1 {
+                        businessName = 'plugin-app'
+                        partKey = 'plugin-app'
+                        buildTask = ':plugin-app:assembleRelease'
+                        apkName = 'plugin-app-release.apk'
+                        apkPath = 'plugin-app/build/outputs/apk/release/plugin-app-release.apk'
+                    }
+                }
+            }
+        }
+
+        loaderApkProjectPath = 'plugin-loader'
+        runtimeApkProjectPath = 'plugin-runtime'
+
+        version = 1
+        compactVersion = [1, 2, 3]
+        uuidNickName = "1.0"
+    }
+}

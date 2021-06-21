@@ -21,6 +21,10 @@
 #-renamesourcefileattribute SourceFile
 
 #noinspection ShrinkerUnresolvedReference
--keep class com.tencent.shadow.core.common.**{*;}
+-keep class org.slf4j.**{*;}
+-dontwarn org.slf4j.impl.**
+
 -keep class com.tencent.shadow.core.runtime.**{*;}
--keep class com.tencent.shadow.dynamic.host.**{*;}
+
+#自定义：需要keep在宿主AndroidManifest.xml注册的壳子activity
+-keep class com.test.plugin_runtime.**{*;}
