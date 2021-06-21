@@ -1,2 +1,7 @@
+include ':plugin-app'
+include ':plugin-loader'
+include ':plugin-runtime'
+include ':plugin-manager'
+include ':constants'
 include ':app'
 rootProject.name = "TencentShadowStudySindi"

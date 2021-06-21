@@ -1,0 +1,44 @@
+def gitShortRev() {
+    def gitCommit = ""
+    def proc = "git rev-parse --short HEAD".execute()
+    proc.in.eachLine { line -> gitCommit = line }
+    proc.err.eachLine { line -> println line }
+    proc.waitFor()
+    return gitCommit
+}
+
+allprojects {
+    ext.COMPILE_SDK_VERSION = 30
+    ext.BUILD_TOOLS_VERSION = "28.0.3"
+    ext.MIN_SDK_VERSION = 21
+    ext.TARGET_SDK_VERSION = 28
+    ext.VERSION_CODE = 1
+    ext.VERSION_NAME = "1.0"
+    ext.APP_APPLICATION_ID = 'com.test.shadow'
+
+    if ("${System.env.PUBLISH_RELEASE}".equalsIgnoreCase("true")) {
+        ext.VERSION_SUFFIX = ""
+    } else if ("${System.env.ORANGE}".equalsIgnoreCase("true")) {
+        ext.VERSION_SUFFIX = "-${System.env.ORANGE_COMMIT_SHORT}-SNAPSHOT"
+    } else {
+        ext.VERSION_SUFFIX = "-${gitShortRev()}-SNAPSHOT"
+    }
+    ext.ARTIFACT_VERSION = ext.VERSION_NAME + ext.VERSION_SUFFIX
+
+    repositories {
+        google()
+        jcenter()
+        mavenLocal()//使用本地库
+    }
+    //环境检查
+    envCheck()
+}
+
+def envCheck(){
+    //优化错误提示，不然会出现代码中找不到android依赖的问题
+    def jarFile = file("${System.getenv().get('ANDROID_HOME')}/platforms/android-${project.COMPILE_SDK_VERSION}/android.jar")
+
+    if(!jarFile.exists()){
+        throw new RuntimeException("Missing SDK Platform Android，API ${project.COMPILE_SDK_VERSION}。请确保以下文件存在: ${jarFile.absolutePath}")
+    }
+}

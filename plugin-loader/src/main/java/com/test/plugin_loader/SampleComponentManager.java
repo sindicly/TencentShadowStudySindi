@@ -11,7 +11,11 @@ import android.content.ComponentName;
 import android.content.Context;
 
 import com.tencent.shadow.core.loader.infos.ContainerProviderInfo;
-import com.tencent.shadow.core.loader.managers.ComponentManager;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
 
 
 public class SampleComponentManager extends ComponentManager {
@@ -50,13 +54,14 @@ public class SampleComponentManager extends ComponentManager {
     public ContainerProviderInfo onBindContainerContentProvider(ComponentName pluginContentProvider) {
         return new ContainerProviderInfo(
                 "com.tencent.shadow.runtime.container.PluginContainerContentProvider",
-                "com.tencent.shadow.my.contentprovider");
+                "com.tencent.shadow.sindi.contentprovider");
     }
 
-/*    @Nullable
+    @Nullable
     @Override
     public List<BroadcastInfo> getBroadcastInfoList(@NotNull String s) {
         List<ComponentManager.BroadcastInfo> broadcastInfos = new ArrayList<>();
+
         //如果有静态广播需要像下面代码这样注册
 //        if (partKey.equals(Constant.PART_KEY_PLUGIN_MAIN_APP)) {
 //            broadcastInfos.add(
@@ -67,5 +72,5 @@ public class SampleComponentManager extends ComponentManager {
 //            );
 //        }
         return broadcastInfos;
-    }*/
+    }
 }

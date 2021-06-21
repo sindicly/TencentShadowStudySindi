@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="testRunner" value="PLATFORM" />
+        <option name="disableWrapperSourceDistributionNotification" value="true" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="gradleHome" value="$PROJECT_DIR$/../../gradle-6.5-all" />
@@ -12,6 +14,11 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/constants" />
+            <option value="$PROJECT_DIR$/plugin-app" />
+            <option value="$PROJECT_DIR$/plugin-loader" />
+            <option value="$PROJECT_DIR$/plugin-manager" />
+            <option value="$PROJECT_DIR$/plugin-runtime" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
