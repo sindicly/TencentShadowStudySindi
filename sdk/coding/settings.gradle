@@ -1,0 +1,2 @@
+include 'checks', 'lint'
+include 'code-generator'

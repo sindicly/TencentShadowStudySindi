@@ -34,9 +34,14 @@ android {
 
 dependencies {
     implementation project(path: ':constants')
-    implementation "com.tencent.shadow.dynamic:loader-impl:$shadow_version"
-    compileOnly "com.tencent.shadow.core:activity-container:$shadow_version"
-    compileOnly "com.tencent.shadow.core:common:$shadow_version"
-    compileOnly "com.tencent.shadow.dynamic:host:$shadow_version"//这行依赖是为了防止在proguard的时候找不到LoaderFactory接口
+
+    implementation 'com.tencent.shadow.core:loader'
+    implementation 'com.tencent.shadow.dynamic:dynamic-loader'
+    implementation 'com.tencent.shadow.dynamic:dynamic-loader-impl'
+    compileOnly 'com.tencent.shadow.core:runtime-debug'
+    compileOnly 'com.tencent.shadow.core:activity-container-debug'
+    compileOnly 'com.tencent.shadow.core:common-debug'
+    //下面这行依赖是为了防止在proguard的时候找不到LoaderFactory接口
+    compileOnly 'com.tencent.shadow.dynamic:dynamic-host-debug'
 
 }

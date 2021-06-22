@@ -28,7 +28,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-        mavenLocal()//使用本地库
     }
     //环境检查
     envCheck()

@@ -1,7 +1,9 @@
 package com.test.plugin_manager;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.RemoteException;
+
 import com.tencent.shadow.core.common.Logger;
 import com.tencent.shadow.core.common.LoggerFactory;
 import com.tencent.shadow.core.manager.installplugin.InstalledPlugin;
@@ -9,7 +11,9 @@ import com.tencent.shadow.core.manager.installplugin.InstalledType;
 import com.tencent.shadow.core.manager.installplugin.PluginConfig;
 import com.tencent.shadow.dynamic.host.FailedException;
 import com.tencent.shadow.dynamic.manager.PluginManagerThatUseDynamicLoader;
+
 import org.json.JSONException;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -22,6 +26,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+
 /**
  * SimpleDes:
  * Creator: Sindi

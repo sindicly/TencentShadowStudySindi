@@ -5,3 +5,8 @@ include ':plugin-manager'
 include ':constants'
 include ':app'
 rootProject.name = "TencentShadowStudySindi"
+
+
+includeBuild 'sdk/coding'
+includeBuild 'sdk/core'
+includeBuild 'sdk/dynamic'

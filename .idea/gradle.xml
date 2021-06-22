@@ -4,6 +4,57 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/sdk/coding" name="coding">
+                <projects>
+                  <project path="$PROJECT_DIR$/sdk/coding" />
+                  <project path="$PROJECT_DIR$/sdk/coding/checks" />
+                  <project path="$PROJECT_DIR$/sdk/coding/code-generator" />
+                  <project path="$PROJECT_DIR$/sdk/coding/lint" />
+                </projects>
+              </build>
+              <build path="$PROJECT_DIR$/sdk/core" name="core">
+                <projects>
+                  <project path="$PROJECT_DIR$/sdk/core" />
+                  <project path="$PROJECT_DIR$/sdk/core/activity-container" />
+                  <project path="$PROJECT_DIR$/sdk/core/common" />
+                  <project path="$PROJECT_DIR$/sdk/core/generate-delegate-code" />
+                  <project path="$PROJECT_DIR$/sdk/core/gradle-plugin" />
+                  <project path="$PROJECT_DIR$/sdk/core/jar-wrapper" />
+                  <project path="$PROJECT_DIR$/sdk/core/jar-wrapper/activity-container-debug" />
+                  <project path="$PROJECT_DIR$/sdk/core/jar-wrapper/activity-container-release" />
+                  <project path="$PROJECT_DIR$/sdk/core/jar-wrapper/common-debug" />
+                  <project path="$PROJECT_DIR$/sdk/core/jar-wrapper/common-realse" />
+                  <project path="$PROJECT_DIR$/sdk/core/jar-wrapper/runtime-debug" />
+                  <project path="$PROJECT_DIR$/sdk/core/jar-wrapper/runtime-release" />
+                  <project path="$PROJECT_DIR$/sdk/core/load-parameters" />
+                  <project path="$PROJECT_DIR$/sdk/core/loader" />
+                  <project path="$PROJECT_DIR$/sdk/core/manager" />
+                  <project path="$PROJECT_DIR$/sdk/core/runtime" />
+                  <project path="$PROJECT_DIR$/sdk/core/transform" />
+                  <project path="$PROJECT_DIR$/sdk/core/transform-kit" />
+                  <project path="$PROJECT_DIR$/sdk/core/utils" />
+                </projects>
+              </build>
+              <build path="$PROJECT_DIR$/sdk/dynamic" name="dynamic">
+                <projects>
+                  <project path="$PROJECT_DIR$/sdk/dynamic" />
+                  <project path="$PROJECT_DIR$/sdk/dynamic/dynamic-host" />
+                  <project path="$PROJECT_DIR$/sdk/dynamic/dynamic-host-multi-loader-ext" />
+                  <project path="$PROJECT_DIR$/sdk/dynamic/dynamic-loader" />
+                  <project path="$PROJECT_DIR$/sdk/dynamic/dynamic-loader-impl" />
+                  <project path="$PROJECT_DIR$/sdk/dynamic/dynamic-manager" />
+                  <project path="$PROJECT_DIR$/sdk/dynamic/dynamic-manager-multi-loader-ext" />
+                  <project path="$PROJECT_DIR$/sdk/dynamic/jar-wrapper" />
+                  <project path="$PROJECT_DIR$/sdk/dynamic/jar-wrapper/dynamic-host-debug" />
+                  <project path="$PROJECT_DIR$/sdk/dynamic/jar-wrapper/dynamic-host-realse" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
         <option name="testRunner" value="PLATFORM" />
         <option name="disableWrapperSourceDistributionNotification" value="true" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
@@ -19,6 +70,39 @@
             <option value="$PROJECT_DIR$/plugin-loader" />
             <option value="$PROJECT_DIR$/plugin-manager" />
             <option value="$PROJECT_DIR$/plugin-runtime" />
+            <option value="$PROJECT_DIR$/sdk/coding" />
+            <option value="$PROJECT_DIR$/sdk/coding/checks" />
+            <option value="$PROJECT_DIR$/sdk/coding/code-generator" />
+            <option value="$PROJECT_DIR$/sdk/coding/lint" />
+            <option value="$PROJECT_DIR$/sdk/core" />
+            <option value="$PROJECT_DIR$/sdk/core/activity-container" />
+            <option value="$PROJECT_DIR$/sdk/core/common" />
+            <option value="$PROJECT_DIR$/sdk/core/generate-delegate-code" />
+            <option value="$PROJECT_DIR$/sdk/core/gradle-plugin" />
+            <option value="$PROJECT_DIR$/sdk/core/jar-wrapper" />
+            <option value="$PROJECT_DIR$/sdk/core/jar-wrapper/activity-container-debug" />
+            <option value="$PROJECT_DIR$/sdk/core/jar-wrapper/activity-container-release" />
+            <option value="$PROJECT_DIR$/sdk/core/jar-wrapper/common-debug" />
+            <option value="$PROJECT_DIR$/sdk/core/jar-wrapper/common-realse" />
+            <option value="$PROJECT_DIR$/sdk/core/jar-wrapper/runtime-debug" />
+            <option value="$PROJECT_DIR$/sdk/core/jar-wrapper/runtime-release" />
+            <option value="$PROJECT_DIR$/sdk/core/load-parameters" />
+            <option value="$PROJECT_DIR$/sdk/core/loader" />
+            <option value="$PROJECT_DIR$/sdk/core/manager" />
+            <option value="$PROJECT_DIR$/sdk/core/runtime" />
+            <option value="$PROJECT_DIR$/sdk/core/transform" />
+            <option value="$PROJECT_DIR$/sdk/core/transform-kit" />
+            <option value="$PROJECT_DIR$/sdk/core/utils" />
+            <option value="$PROJECT_DIR$/sdk/dynamic" />
+            <option value="$PROJECT_DIR$/sdk/dynamic/dynamic-host" />
+            <option value="$PROJECT_DIR$/sdk/dynamic/dynamic-host-multi-loader-ext" />
+            <option value="$PROJECT_DIR$/sdk/dynamic/dynamic-loader" />
+            <option value="$PROJECT_DIR$/sdk/dynamic/dynamic-loader-impl" />
+            <option value="$PROJECT_DIR$/sdk/dynamic/dynamic-manager" />
+            <option value="$PROJECT_DIR$/sdk/dynamic/dynamic-manager-multi-loader-ext" />
+            <option value="$PROJECT_DIR$/sdk/dynamic/jar-wrapper" />
+            <option value="$PROJECT_DIR$/sdk/dynamic/jar-wrapper/dynamic-host-debug" />
+            <option value="$PROJECT_DIR$/sdk/dynamic/jar-wrapper/dynamic-host-realse" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

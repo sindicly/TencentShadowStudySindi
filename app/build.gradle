@@ -51,8 +51,9 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
     implementation project(path: ':constants')//共同使用的常量库
+    implementation 'com.tencent.shadow.core:common'//AndroidLogLoggerFactory
     implementation 'commons-io:commons-io:2.5'//sample-host从assets中复制插件用的
-    implementation "com.tencent.shadow.dynamic:host:$shadow_version"//腾讯插件框架shadow
+    implementation 'com.tencent.shadow.dynamic:dynamic-host'//腾讯插件框架shadow
 }
 
 def createCopyTask(projectName, buildType, name, apkName, inputFile, taskName) {

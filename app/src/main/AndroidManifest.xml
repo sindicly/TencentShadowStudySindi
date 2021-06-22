@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.test.shadow">
+
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -31,7 +33,7 @@
             android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
             android:hardwareAccelerated="true"
             android:launchMode="standard"
-            android:multiprocess="true"
+            android:process=":main_plugin"
             android:screenOrientation="portrait"
             android:theme="@style/transparent_theme" />
 
@@ -40,7 +42,7 @@
             android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
             android:hardwareAccelerated="true"
             android:launchMode="singleInstance"
-            android:multiprocess="true"
+            android:process=":main_plugin"
             android:screenOrientation="portrait"
             android:theme="@style/transparent_theme" />
 
@@ -49,7 +51,7 @@
             android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
             android:hardwareAccelerated="true"
             android:launchMode="singleTask"
-            android:multiprocess="true"
+            android:process=":main_plugin"
             android:screenOrientation="portrait"
             android:theme="@style/transparent_theme" />
 

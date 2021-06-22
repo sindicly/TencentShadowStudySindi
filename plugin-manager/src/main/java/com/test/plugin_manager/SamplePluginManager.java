@@ -1,21 +1,25 @@
 package com.test.plugin_manager;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+
+import com.tencent.shadow.core.manager.installplugin.InstalledPlugin;
+import com.tencent.shadow.dynamic.host.EnterCallback;
+import com.test.constants.Constant;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 /**
  * SimpleDes:
  * Creator: Sindi
  * Date: 2021-06-21
  * UseDes:
  */
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import com.tencent.shadow.core.manager.installplugin.InstalledPlugin;
-import com.tencent.shadow.dynamic.host.EnterCallback;
-import com.test.constants.Constant;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+
 
 public class SamplePluginManager extends FastPluginManager {
     private ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -47,8 +51,8 @@ public class SamplePluginManager extends FastPluginManager {
      */
     @Override
     protected String getPluginProcessServiceName(String partKey) {//在这里支持多个插件
-        if ("plugin-app".equals(partKey)) {//plugin-app：插件标识名
-            return "com.example.demo.service.MainPluginProcessService";
+        if (Constant.PLUGIN_APP_NAME.equals(partKey)) {//plugin-app：插件标识名
+            return "com.test.shadow.service.MainPluginProcessService";
         } else {
             //如果有默认PPS，可用return代替throw
             throw new IllegalArgumentException("unexpected plugin load request意外的插件加载请求: " + partKey);

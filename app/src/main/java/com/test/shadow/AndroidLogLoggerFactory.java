@@ -1,5 +1,6 @@
 package com.test.shadow;
 
+
 import android.util.Log;
 
 import com.tencent.shadow.core.common.ILoggerFactory;
@@ -9,6 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+
+
 /**
  * SimpleDes:
  * Creator: Sindi

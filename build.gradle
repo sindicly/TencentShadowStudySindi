@@ -1,32 +1,47 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext {
-        kotlin_version = "1.4.21"
-        shadow_version = 'local-de387306-SNAPSHOT'
+        kotlin_version = "1.4.20"
+        build_gradle_version = '4.0.2'
     }
 
     repositories {
         google()
         jcenter()
-        mavenLocal()//添加这个
+
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.1.1"
+        classpath "com.android.tools.build:gradle:$build_gradle_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "com.tencent.shadow.core:gradle-plugin:$shadow_version"
     }
 }
 
-/*allprojects {
+/*allprojects {//已经在buildScripts/gradle/common.gradle配置
     repositories {
         google()
         jcenter()
-        mavenLocal()//添加这个
     }
 }*/
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
-}
-
 apply from: 'buildScripts/gradle/common.gradle'
+apply from: "buildScripts/gradle/maven.gradle"
+
+task clean(type: Delete) {//定义任务
+    delete rootProject.buildDir
+
+    dependsOn gradle.includedBuild('coding').task(':checks:clean')//添加依赖
+    dependsOn gradle.includedBuild('coding').task(':lint:clean')
+    dependsOn gradle.includedBuild('coding').task(':code-generator:clean')
+    dependsOn gradle.includedBuild('core').task(':gradle-plugin:clean')
+    dependsOn gradle.includedBuild('core').task(':common:clean')
+    dependsOn gradle.includedBuild('core').task(':loader:clean')
+    dependsOn gradle.includedBuild('core').task(':manager:clean')
+    dependsOn gradle.includedBuild('core').task(':runtime:clean')
+    dependsOn gradle.includedBuild('core').task(':activity-container:clean')
+    dependsOn gradle.includedBuild('core').task(':transform:clean')
+    dependsOn gradle.includedBuild('core').task(':transform-kit:clean')
+    dependsOn gradle.includedBuild('dynamic').task(':dynamic-host:clean')
+    dependsOn gradle.includedBuild('dynamic').task(':dynamic-loader:clean')
+    dependsOn gradle.includedBuild('dynamic').task(':dynamic-loader-impl:clean')
+    dependsOn gradle.includedBuild('dynamic').task(':dynamic-manager:clean')
+}

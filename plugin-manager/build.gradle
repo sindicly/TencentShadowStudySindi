@@ -8,7 +8,6 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.test.plugin_manager"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
@@ -30,14 +29,18 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
 
-    implementation "com.tencent.shadow.dynamic:manager:$shadow_version"
-    compileOnly "com.tencent.shadow.core:common:$shadow_version"
-    compileOnly "com.tencent.shadow.dynamic:host:$shadow_version"
+    implementation 'com.tencent.shadow.dynamic:dynamic-manager'
+    implementation 'com.tencent.shadow.core:manager'
+    implementation 'com.tencent.shadow.dynamic:dynamic-loader'
+    compileOnly 'com.tencent.shadow.core:common-debug'
+    compileOnly 'com.tencent.shadow.dynamic:dynamic-host-debug'
+
     implementation project(path: ':constants')
-
-
 }

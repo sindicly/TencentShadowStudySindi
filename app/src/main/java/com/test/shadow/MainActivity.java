@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 bundle.putString(Constant.KEY_PLUGIN_ZIP_PATH, PluginHelper.getInstance().pluginZipFile.getAbsolutePath());
                 bundle.putString(Constant.KEY_PLUGIN_NAME, Constant.PLUGIN_APP_NAME);// partKey 每个插件都有自己的 partKey 用来区分多个插件，如何配置在下面讲到
                 bundle.putString(Constant.KEY_ACTIVITY_CLASSNAME, "com.test.plugin_app.SplashActivity");//要启动的插件的Activity页面
-                bundle.putBundle("extra_to_plugin_bundle", new Bundle()); // 要传入到插件里的参数
+                bundle.putBundle(Constant.KEY_EXTRAS, new Bundle()); // 要传入到插件里的参数
                 MyApplication.getApp().getPluginManager().enter(MainActivity.this, Constant.FROM_ID_START_ACTIVITY, bundle, new EnterCallback() {
                     @Override
                     public void onShowLoadingView(View view) {
