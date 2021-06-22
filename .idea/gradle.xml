@@ -69,6 +69,7 @@
             <option value="$PROJECT_DIR$/plugin-app" />
             <option value="$PROJECT_DIR$/plugin-loader" />
             <option value="$PROJECT_DIR$/plugin-manager" />
+            <option value="$PROJECT_DIR$/plugin-other" />
             <option value="$PROJECT_DIR$/plugin-runtime" />
             <option value="$PROJECT_DIR$/sdk/coding" />
             <option value="$PROJECT_DIR$/sdk/coding/checks" />

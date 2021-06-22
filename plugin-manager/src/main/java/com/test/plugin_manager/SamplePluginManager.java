@@ -53,7 +53,9 @@ public class SamplePluginManager extends FastPluginManager {
     protected String getPluginProcessServiceName(String partKey) {//在这里支持多个插件
         if (Constant.PLUGIN_APP_NAME.equals(partKey)) {//plugin-app：插件标识名
             return "com.test.shadow.service.MainPluginProcessService";
-        } else {
+        }if (Constant.PLUGIN_OTHER_NAME.equals(partKey)) {//plugin-other：插件标识名
+            return "com.test.shadow.service.MainPluginProcessService";
+        }  else {
             //如果有默认PPS，可用return代替throw
             throw new IllegalArgumentException("unexpected plugin load request意外的插件加载请求: " + partKey);
         }

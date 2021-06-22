@@ -9,13 +9,10 @@ package com.test.plugin_loader;
 
 import android.content.ComponentName;
 import android.content.Context;
-
 import com.tencent.shadow.core.loader.infos.ContainerProviderInfo;
 import com.tencent.shadow.core.loader.managers.ComponentManager;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.util.ArrayList;
 import java.util.List;
 

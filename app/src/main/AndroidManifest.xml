@@ -23,7 +23,6 @@
             android:theme="@style/transparent_theme" //theme需要注册成透明
         -->
 
-
         <service
             android:name=".service.MainPluginProcessService"
             android:process=":main_plugin" />

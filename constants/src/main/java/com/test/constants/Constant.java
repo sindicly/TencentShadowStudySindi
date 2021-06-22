@@ -13,6 +13,7 @@ final public class Constant {
     public static final String KEY_PLUGIN_NAME = "key_plugin_name";
 
     public static final String PLUGIN_APP_NAME = "plugin-app";
+    public static final String PLUGIN_OTHER_NAME = "plugin-other";
 
     public static final int FROM_ID_NOOP = 1000;
     public static final long FROM_ID_START_ACTIVITY = 1002;//标识启动的是Activity

@@ -1,4 +1,4 @@
-buildscript {
+buildscript {//这个模块要放在plugins {} 之前
     repositories {
         google()
         jcenter()
@@ -77,6 +77,13 @@ shadow {
                         apkName = 'plugin-app-debug.apk'
                         apkPath = 'plugin-app/build/outputs/apk/debug/plugin-app-debug.apk'
                     }
+                    pluginApk2 {
+                        businessName = 'plugin-other'
+                        partKey = 'plugin-other'
+                        buildTask = ':plugin-other:assembleDebug'
+                        apkName = 'plugin-other-debug.apk'
+                        apkPath = 'plugin-other/build/outputs/apk/debug/plugin-other-debug.apk'
+                    }
                 }
             }
 
@@ -90,6 +97,13 @@ shadow {
                         buildTask = ':plugin-app:assembleRelease'
                         apkName = 'plugin-app-release.apk'
                         apkPath = 'plugin-app/build/outputs/apk/release/plugin-app-release.apk'
+                    }
+                    pluginApk2 {
+                        businessName = 'plugin-other'
+                        partKey = 'plugin-other'
+                        buildTask = ':plugin-other:assembleDebug'
+                        apkName = 'plugin-other-debug.apk'
+                        apkPath = 'plugin-other/build/outputs/apk/debug/plugin-other-debug.apk'
                     }
                 }
             }

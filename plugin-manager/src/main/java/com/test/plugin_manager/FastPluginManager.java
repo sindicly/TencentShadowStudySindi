@@ -3,7 +3,6 @@ package com.test.plugin_manager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.RemoteException;
-
 import com.tencent.shadow.core.common.Logger;
 import com.tencent.shadow.core.common.LoggerFactory;
 import com.tencent.shadow.core.manager.installplugin.InstalledPlugin;
@@ -11,9 +10,7 @@ import com.tencent.shadow.core.manager.installplugin.InstalledType;
 import com.tencent.shadow.core.manager.installplugin.PluginConfig;
 import com.tencent.shadow.dynamic.host.FailedException;
 import com.tencent.shadow.dynamic.manager.PluginManagerThatUseDynamicLoader;
-
 import org.json.JSONException;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -39,12 +36,13 @@ public abstract class FastPluginManager extends PluginManagerThatUseDynamicLoade
 
     private static final Logger mLogger = LoggerFactory.getLogger(FastPluginManager.class);
     private ExecutorService mFixedPool = Executors.newFixedThreadPool(4);
+
     public FastPluginManager(Context context) {
         super(context);
     }
 
     /*安装插件*/
-    public InstalledPlugin installPlugin(String zip, String hash , boolean odex) throws IOException, JSONException, InterruptedException, ExecutionException {
+    public InstalledPlugin installPlugin(String zip, String hash, boolean odex) throws IOException, JSONException, InterruptedException, ExecutionException {
         final PluginConfig pluginConfig = installPluginFromZip(new File(zip), hash);
         final String uuid = pluginConfig.UUID;
         List<Future> futures = new LinkedList<>();
@@ -131,5 +129,6 @@ public abstract class FastPluginManager extends PluginManagerThatUseDynamicLoade
             mPluginLoader.loadPlugin(partKey);
         }
     }
+
     protected abstract String getPluginProcessServiceName(String partKey);
 }
