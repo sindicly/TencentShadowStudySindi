@@ -19,7 +19,7 @@
         <!--以下这些类不打包在宿主app中，打包在plugin-runtime中，以便减少宿主方法数增量,Activity 路径需要和插件中的匹配，后面会说到-->
         <!--
             android:multiprocess="true"//表示多进程(多插件的时候使用)
-            android:process=":plugin"//表示单进程(当个插件使用)
+            android:process=":plugin"//表示单进程(单插件、多插件可用)
             android:theme="@style/transparent_theme" //theme需要注册成透明
         -->
 
@@ -27,12 +27,18 @@
             android:name=".service.MainPluginProcessService"
             android:process=":main_plugin" />
 
+        <service
+            android:name=".service.OtherPluginProcessService"
+            android:process=":other_plugin" />
+
+
+
         <activity
             android:name="com.test.plugin_runtime.PluginDefaultProxyActivity"
             android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
             android:hardwareAccelerated="true"
             android:launchMode="standard"
-            android:process=":main_plugin"
+            android:multiprocess="true"
             android:screenOrientation="portrait"
             android:theme="@style/transparent_theme" />
 
@@ -41,7 +47,7 @@
             android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
             android:hardwareAccelerated="true"
             android:launchMode="singleInstance"
-            android:process=":main_plugin"
+            android:multiprocess="true"
             android:screenOrientation="portrait"
             android:theme="@style/transparent_theme" />
 
@@ -50,7 +56,7 @@
             android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
             android:hardwareAccelerated="true"
             android:launchMode="singleTask"
-            android:process=":main_plugin"
+            android:multiprocess="true"
             android:screenOrientation="portrait"
             android:theme="@style/transparent_theme" />
 
