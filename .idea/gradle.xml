@@ -65,6 +65,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/app-lib" />
             <option value="$PROJECT_DIR$/constants" />
             <option value="$PROJECT_DIR$/plugin-app" />
             <option value="$PROJECT_DIR$/plugin-loader" />

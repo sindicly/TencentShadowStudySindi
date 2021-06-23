@@ -10,6 +10,8 @@ import android.webkit.WebView;
 import com.tencent.shadow.core.common.LoggerFactory;
 import com.tencent.shadow.dynamic.host.DynamicRuntime;
 import com.tencent.shadow.dynamic.host.PluginManager;
+import com.test.app_lib.HostUiLayerProvider;
+import com.test.app_lib.utils.Tools;
 import com.test.shadow.manager.PluginHelper;
 import com.test.shadow.manager.Shadow;
 
@@ -42,6 +44,8 @@ public class MyApplication extends Application {
             DynamicRuntime.recoveryRuntime(this);
         }
         PluginHelper.getInstance().init(this);
+        HostUiLayerProvider.init(this);
+        Tools.init(this);
     }
 
     private static void setWebViewDataDirectorySuffix() {

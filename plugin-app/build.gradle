@@ -55,7 +55,11 @@ dependencies {
     //Shadow Transform后业务代码会有一部分实际引用runtime中的类
     //如果不以compileOnly方式依赖，会导致其他Transform或者Proguard找不到这些类
     compileOnly 'com.tencent.shadow.core:runtime-debug'
+
+    //注意app-lib-debug要用compileOnly编译而不打包在插件中。在packagePlugin任务中配置hostWhiteList允许插件访问宿主的类。
+    compileOnly files("${project(":app-lib").getBuildDir()}/outputs/jar/app-lib-debug.jar")
 }
+preBuild.dependsOn(":app-lib:jarDebugPackage")
 
 
 apply plugin: 'com.tencent.shadow.plugin'
@@ -76,6 +80,7 @@ shadow {
                         buildTask = ':plugin-app:assembleDebug'
                         apkName = 'plugin-app-debug.apk'
                         apkPath = 'plugin-app/build/outputs/apk/debug/plugin-app-debug.apk'
+                        hostWhiteList = ["com.test.app_lib","com.test.app_lib.**"]
                     }
                     pluginApk2 {
                         businessName = 'plugin-other'

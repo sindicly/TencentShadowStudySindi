@@ -1,0 +1,68 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.1.0'
+}
+
+
+//插件调用宿主类----生成宿主 jar 包  (这个要写在app-lib  Library目录下 )
+//下面的jarPackage和afterEvaluate负责让这个aar再生成一个输出jar包的任务
+//实在发现没有生成jar：手动调用app-lib->build->jarDebugPackage
+def jarPackage(buildType) {
+    return tasks.create("jar${buildType.capitalize()}Package", Copy) {
+        def aarFile = file(project.buildDir.path + "/outputs/aar/${project.name}-${buildType}.aar")
+        def outputDir = file(project.buildDir.path + "/outputs/jar")
+
+        from zipTree(aarFile)
+        into outputDir
+        include 'classes.jar'
+        rename 'classes.jar', "${project.name}-${buildType}.jar"
+        group = 'build'
+        description = '生成jar包'
+    }.dependsOn(project.getTasksByName("assemble${buildType.capitalize()}", false).first())
+}
+
+afterEvaluate {
+    android {
+        buildTypes.findAll().each { buildType ->
+            def buildTypeName = buildType.getName()
+            jarPackage(buildTypeName)
+        }
+    }
+}

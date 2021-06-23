@@ -1,3 +1,4 @@
+include ':app-lib'
 include ':plugin-other'
 include ':plugin-app'
 include ':plugin-loader'
