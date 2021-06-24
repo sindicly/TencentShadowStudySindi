@@ -32,7 +32,7 @@ class Tools private constructor(private val mContext: Context) {
         //获取插件的数据
         fun getPluginData(callback: ((str:String) -> String)? = null) {
             val str ="123"
-            println("获取到插件的数据："+callback?.invoke(str))
+            println("获取到插件的数据 ："+callback?.invoke(str))
         }
     }
 }
