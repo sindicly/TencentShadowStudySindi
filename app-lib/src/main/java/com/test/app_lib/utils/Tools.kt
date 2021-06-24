@@ -1,7 +1,6 @@
-package com.test.app_lib.utils;
+package com.test.app_lib.utils
 
-import android.content.Context;
-import android.content.res.Resources;
+import android.content.Context
 
 /**
  * SimpleDes:
@@ -9,32 +8,31 @@ import android.content.res.Resources;
  * Date: 2021-06-23
  * UseDes:
  */
-public class Tools {
+class Tools private constructor(private val mContext: Context) {
+    val resourcesID: Int
+        get() {
+            val res = mContext.resources
+            return res.getIdentifier("green_7200AF66", "color", mContext.packageName)
+        }
 
-    public static void cc() {
-        System.out.println("1234564");
-    }
+    companion object {
+        fun cc() {
+            println("1234564")
+        }
+
+        var instance: Tools? = null
+            private set
+
+        @JvmStatic
+        fun init(mHostApplicationContext: Context) {
+            instance = Tools(mHostApplicationContext)
+        }
 
 
-    private static Tools sInstance;
-
-    final private Context mContext;
-
-    public static void init(Context mHostApplicationContext) {
-        sInstance = new Tools(mHostApplicationContext);
-    }
-
-    public static Tools getInstance() {
-        return sInstance;
-    }
-
-
-    private Tools(Context mHostApplicationContext) {
-        this.mContext = mHostApplicationContext;
-    }
-
-    public int getResourcesID() {
-        Resources res = mContext.getResources();
-        return res.getIdentifier("green_7200AF66", "color", mContext.getPackageName());
+        //获取插件的数据
+        fun getPluginData(callback: ((str:String) -> String)? = null) {
+            val str ="123"
+            println("获取到插件的数据："+callback?.invoke(str))
+        }
     }
 }
